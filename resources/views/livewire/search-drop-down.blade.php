@@ -5,12 +5,23 @@
           </svg>
     </div>
     <input
+
+    wire:model.debounce.500ms='search' type="text" class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-2 focus:outline-none focus:shadow-outline" placeholder="Search"
+
+    x-ref="search"
+
+    @keydown.window="
+        if (event.keyCode === 191)
+        {
+            event.preventDefault();
+            $refs.search.focus();
+        }
+    "
     @keydown.escape.window="isOpen = false"
     @focus = "isOpen = true"
     @keydown.shift.tab ="isOpen = false"
     @keydown ="isOpen = true"
-
-     wire:model.debounce.500ms='search' type="text" class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-2 focus:outline-none focus:shadow-outline" placeholder="Search">
+>
     <div wire:loading class="spinner top-0 right-0 mr-4 mt-5"></div>
     @if (strlen($search)>2)
         <div class=" z-50 absolute bg-gray-800 rounded text-sm w-64 mt-4" x-show="isOpen" >

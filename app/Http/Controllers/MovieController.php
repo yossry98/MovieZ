@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ViewModels\MoviesViewModel;
+use App\ViewModels\MovieViewModel;
 use GrahamCampbell\ResultType\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -12,23 +14,20 @@ class MovieController extends Controller
     public function index()
     {
         $populerMovies = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/movie/popular')
-        ->json()['results'];
+            ->get('https://api.themoviedb.org/3/movie/popular')
+            ->json()['results'];
 
-        $moviesGenres = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/genre/movie/list')
-        ->json()['genres'];
-
-        $genres = collect($moviesGenres)->mapWithKeys(function ($genre)
-            {
-                return [$genre['id'] => $genre['name']];
-            });
+        $genres = Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/genre/movie/list')
+            ->json()['genres'];
 
         $nowPlayingMovies = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/movie/now_playing')
-        ->json()['results'];
+            ->get('https://api.themoviedb.org/3/movie/now_playing')
+            ->json()['results'];
 
-        return view('layouts.index' ,compact(['populerMovies', 'genres', 'nowPlayingMovies']));
+        $moviesViewModel = new MoviesViewModel($populerMovies, $genres, $nowPlayingMovies);
+
+        return view('layouts.index', $moviesViewModel);
     }
 
     public function create()
@@ -44,11 +43,11 @@ class MovieController extends Controller
     public function show($id)
     {
         $movie = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3//movie/'.$id.'?append_to_response=videos,credits,images')
-        ->json();
-
+            ->get('https://api.themoviedb.org/3//movie/' . $id . '?append_to_response=videos,credits,images')
+            ->json();
+            $movieViewModel = new MovieViewModel($movie);
         // dump($movie);
-        return view('layouts.show',compact('movie'));
+        return view('layouts.show', $movieViewModel);
     }
 
     public function edit($id)

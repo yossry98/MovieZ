@@ -6,10 +6,8 @@
     <div class="populer-movies">
         <h2 class="uppercase tracking-wider text-yellow-600 font-semibold">Populer Movies</h2>
         <div class="grid grid-cols-5 gap-16">
-
-
             @foreach ($populerMovies as $movie)
-                <x-movie-card :movie="$movie" :genres="$genres"/>
+                <x-movie-card :movie="$movie" />
             @endforeach
 
         </div>
@@ -22,7 +20,7 @@
 
 
             @foreach ($nowPlayingMovies as $movie)
-                <x-movie-card :movie="$movie" :genres="$genres"/>
+                <x-movie-card :movie="$movie" />
             @endforeach
 
         </div>
