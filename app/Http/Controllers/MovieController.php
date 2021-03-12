@@ -27,7 +27,7 @@ class MovieController extends Controller
 
         $moviesViewModel = new MoviesViewModel($populerMovies, $genres, $nowPlayingMovies);
 
-        return view('layouts.index', $moviesViewModel);
+        return view('movies.index', $moviesViewModel);
     }
 
     public function create()
@@ -47,7 +47,7 @@ class MovieController extends Controller
             ->json();
             $movieViewModel = new MovieViewModel($movie);
         // dump($movie);
-        return view('layouts.show', $movieViewModel);
+        return view('movies.show', $movieViewModel);
     }
 
     public function edit($id)

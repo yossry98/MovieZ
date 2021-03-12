@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
 
     <title>@yield('title')</title>
     <livewire:styles />
@@ -19,7 +20,7 @@
                       </svg><h2 class=" font-semibold">MovieZ</h2></a></li>
                     <li class="ml-16"><a href="{{ route('movie.index') }}" class="hover:text-gray-300">Movies</a></li>
                     <li class="ml-6"><a href="" class="hover:text-gray-300">TV Shows</a></li>
-                    <li class="ml-6"><a href="" class="hover:text-gray-300">Actors</a></li>
+                    <li class="ml-6"><a href="{{ route('actor.index') }}" class="hover:text-gray-300">Actors</a></li>
                 </ul>
                 <div class="flex items-center">
                     <livewire:search-drop-down />
@@ -34,5 +35,6 @@
 
     @yield('content')
     <livewire:scripts />
+    @yield('scripts')
 </body>
 </html>
