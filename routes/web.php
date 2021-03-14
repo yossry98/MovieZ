@@ -10,7 +10,7 @@ Route::get('/show/{id}', [MovieController::class,'show'])->name('movie.show');
 Route::prefix("/actor")->group(function()
 {
     Route::get('/', [ActorController::class,'index'])->name('actor.index');
-    Route::get('/page/{page?}', [ActorController::class,'index']);
+    Route::get('/page/{id?}', [ActorController::class,'index']);
     Route::get('/show/{id}', [ActorController::class,'show'])->name('actor.show');
 });
 

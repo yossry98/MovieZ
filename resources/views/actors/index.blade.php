@@ -8,12 +8,12 @@
             <div class="grid grid-cols-5 gap-16">
                 @foreach ($populerActors as $actor)
                     <div class="actor mt-8">
-                        <a href="{{ route('movie.show', $actor['id']) }}">
+                        <a href="{{ route('actor.show', $actor['id']) }}">
                             <img src="{{ $actor['profile_path'] }}" alt="poster" class="hover:opacity-75
                                                         transition esas-in-out duration-150">
                         </a>
                         <div class="mt-2">
-                            <a href="{{ route('movie.show', $actor['id']) }}"
+                            <a href="{{ route('actor.show', $actor['id']) }}"
                                 class="text-lg mt-2 hover:text-gray-300">{{ $actor['name'] }}</a>
                             <div class="text-sm truncate text-gray-400">{{ $actor['works'] }}</div>
                         </div>
