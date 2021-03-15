@@ -7,17 +7,20 @@
             <div class="flex-none">
                 <img src="{{ $actor['profile_path'] }}" alt="{{ $actor['name'] }}" class="w-96">
                 <ul class="flex items-center mt-3">
-                    <li class="mr-2">{{--  facebook --}}
-                        <a href=""><svg class="w-8  fill-current" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
-                            w style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
-                            preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M2.89 2h14.23c.49 0
-                            .88.39.88.88v14.24c0 .48-.39.88-.88.88h-4.08v-6.2h2.08l.31-2.41h-2.39V7.85c0-.7.2-1.18
-                            1.2-1.18h1.28V4.51c-.22-.03-.98-.09-1.86-.09c-1.85 0-3.11 1.12-3.11
-                            3.19v1.78H8.46v2.41h2.09V18H2.89a.89.89 0 0 1-.89-.88V2.88c0-.49.4-.88.89-.88z"
-                            fill="white"/></svg></a></li>
-                    <li class="mr-2">{{--  twitter --}}
-                        <a href=""><svg class="w-8  fill-current" xmlns="http://www.w3.org/2000/svg"
+                    @if ($socialLinks['facebook'])
+                        <li class="mr-2">{{--  facebook --}}
+                            <a href="{{ $socialLinks['facebook'] }}"><svg class="w-8  fill-current" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
+                                w style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M2.89 2h14.23c.49 0
+                                .88.39.88.88v14.24c0 .48-.39.88-.88.88h-4.08v-6.2h2.08l.31-2.41h-2.39V7.85c0-.7.2-1.18
+                                1.2-1.18h1.28V4.51c-.22-.03-.98-.09-1.86-.09c-1.85 0-3.11 1.12-3.11
+                                3.19v1.78H8.46v2.41h2.09V18H2.89a.89.89 0 0 1-.89-.88V2.88c0-.49.4-.88.89-.88z"
+                                fill="white"/></svg></a></li>
+                    @endif
+                    @if ($socialLinks['twitter'])
+                        <li class="mr-2">{{--  twitter --}}
+                        <a href="{{ $socialLinks['twitter'] }}"><svg class="w-8  fill-current" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
                             w style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
                             preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M400 32H48C21.5 32 0 53.5 0 80v352c0
@@ -28,8 +31,10 @@
                             135.2 68.6c-9.3-44.5 24-80.6 64-80.6c18.9 0 35.9 7.9 47.9 20.7c14.8-2.8 29-8.3 41.6-15.8c-4.9
                             15.2-15.2 28-28.8 36.1c13.2-1.4 26-5.1 37.8-10.2c-8.9 13.1-20.1 24.7-32.9 34z"
                             fill="white"/></svg></a></li>
-                    <li class="mr-2">{{--  insta --}}
-                        <a href=""><svg class="w-8  fill-current" xmlns="http://www.w3.org/2000/svg"
+                    @endif
+                    @if ($socialLinks['instagram'])
+                        <li class="mr-2">{{--  insta --}}
+                        <a href="{{ $socialLinks['instagram'] }}"><svg class="w-8  fill-current" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
                             w style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
                             preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path d="M16 0c-4.349
@@ -47,8 +52,10 @@
                             0-5.333-2.385-5.333-5.333s2.385-5.333 5.333-5.333c2.948 0 5.333 2.385 5.333 5.333S18.948 21.333 16 21.333zM26.464
                             7.459a1.923 1.923 0 0 1-1.923 1.921a1.919 1.919 0 1 1 0-3.838c1.057 0 1.923.86 1.923 1.917z"
                             fill="white"/></svg></a></li>
-                    <li class="mr-2">{{--  homepage --}}
-                        <a href=""><svg class="w-8  fill-current" xmlns="http://www.w3.org/2000/svg"
+                    @endif
+                    @if ($actor['homepage'])
+                        <li class="mr-2">{{--  homepage --}}
+                        <a href="{{ $actor['homepage'] }}"><svg class="w-8  fill-current" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false"
                             w style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
                             preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M9 0a9 9 0 1 0 0 18A9 9 0 0 0 9
@@ -60,7 +67,7 @@
                             5.42.22a5.22 5.22 0 0 1 1.67 2.74a2.35 2.35 0 0 0 1.32-.29c.41 2.98-3.15 6.74-5.73 7.73zM5.15 2.09a1.84
                             1.84 0 0 1 2.16.66c-.42.38-.94.63-1.5.72A3 3 0 0 1 6 2.61l-.85-.52z"
                             fill="white"/></svg></a></li>
-
+                    @endif
                 </ul>
             </div>
 
@@ -86,7 +93,7 @@
                 </div>
                 <h4 class="font-semibold mt-12">Know For</h4>
                 <div class="grid grid-cols-5 gap-8 mt-10">
-                    {{-- @foreach($actor['know-for'] as $movie)
+                    @foreach($credits as $movie)
                     <div class="mt-8">
                         <a href="{{ route('movie.show',$movie['id']) }}">
                         <img src="{{ $movie['poster_path'] }}" alt="parasite" class="hover:opacity-75
@@ -96,7 +103,7 @@
                             <a href="{{ route('movie.show',$movie['id']) }}" class="text-lg mt-2 hover:text-gray-300">{{ $movie['title'] }}</a>
                         </div>
                     </div>
-                    @endforeach --}}
+                    @endforeach
                 </div>
             </div>
         </div>
