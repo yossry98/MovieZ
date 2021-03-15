@@ -1,6 +1,6 @@
 @props(['actor'])
 <div class="mt-8">
-    <a href="">
+    <a href="{{ route('actor.show',$actor['id']) }}">
     <img src="https://image.tmdb.org/t/p/w400{{ $actor['profile_path'] }}" alt="parasite" class="hover:opacity-75
     transition esas-in-out duration-150">
     </a>

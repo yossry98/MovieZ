@@ -9,12 +9,12 @@ use Spatie\ViewModels\ViewModel;
 class ActorViewModel extends ViewModel
 {
     public $actor;
-    public $credits;
+    public $knowFor;
     public $socialLinks;
-    public function __construct($actor, $credits, $socialLinks)
+    public function __construct($actor, $knowFor, $socialLinks)
     {
         $this->actor = $actor;
-        $this->credits =$credits;
+        $this->knowFor =$knowFor;
         $this->socialLinks = $socialLinks;
     }
 
@@ -29,22 +29,20 @@ class ActorViewModel extends ViewModel
             'age' => Carbon::parse($actor['birthday'])->age,
 
 
-        ])
-        //->only('id', 'name','profile_path', 'place_of_birth', 'birthday', 'biography','homepage')
-        ->dump();
+        ])->only('id', 'name','profile_path', 'place_of_birth', 'birthday', 'biography','homepage', 'age');
+
     }
-    public function credits()
+    public function knowFor()
     {
         //$cast = collect($this->credits)->get('cast');
-        return collect($this->credits['cast'])->where('media_type','movie')->sortByDesc('popularity')->take(5)
+        return collect($this->knowFor['cast'])->where('media_type','movie')->sortByDesc('popularity')->take(5)
         ->map(function($movie){
             return collect($movie)->merge([
-                'poster_path' => 'https://image.tmdb.org/t/p/w235/'.$movie['poster_path'],
+                'poster_path' => $movie['poster_path']?'https://image.tmdb.org/t/p/w185/'.$movie['poster_path']
+                : 'https://via.placeholder/185x278',
                 'title'=> isset($movie['title'])? $movie['title']:'untitled',
             ])->only('id','title', 'poster_path');
-        })
-        //
-        ->dump();
+        });
     }
     public function socialLinks()
     {
@@ -52,6 +50,20 @@ class ActorViewModel extends ViewModel
             'facebook' => $this->socialLinks['facebook_id']? "https://www.facebook.com/".$this->socialLinks['facebook_id'] : null,
             'instagram' => $this->socialLinks['instagram_id']? "https://www.instagram.com/".$this->socialLinks['instagram_id'] : null,
             'twitter' => $this->socialLinks['twitter_id']? "https://www.facebook.com/".$this->socialLinks['twitter_id'] : null,
-        ])->only('facebook', 'instagram', 'twitter')->dump();
+        ])->only('facebook', 'instagram', 'twitter');
+    }
+    public function credits()
+    {
+        return collect($this->knowFor['cast'])->map(function($movie){
+            return collect($movie)->merge([
+                'year' => Carbon::parse($movie['release_date']? $movie['release_date']: $movie['release_date'])->year,//uncomplete
+                'title'=> collect($movie)->where('media_type'.'movie')? $movie['title']:$movie['name'],
+                'character' =>$movie['character']?$movie['character']:'himself',
+
+            ])->only('id', 'title', 'year', 'character');
+            //->only('id','title', 'poster_path');
+        })->sortByDesc('year')->take(20)
+        //
+        ->dump();
     }
 }
