@@ -30,7 +30,7 @@ class tvShowController extends Controller
 
         $tvShowsViewModel = new tvShowsViewModel($populerTvshows, $genres, $top_rated);
 
-        return view('movies.index', $tvShowsViewModel);
+        return view('tvshow.index', $tvShowsViewModel);
     }
 
     /**
@@ -67,7 +67,7 @@ class tvShowController extends Controller
             ->json();
             $tvShowViewModel = new tvShowViewModel($tvshow);
         // dump($movie);
-        return view('movies.show', $tvShowViewModel);
+        return view('tvshow.show', $tvShowViewModel);
     }
 
     /**
