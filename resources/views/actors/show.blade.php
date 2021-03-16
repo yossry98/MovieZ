@@ -94,12 +94,12 @@
                 <div class="grid grid-cols-5 gap-8 mt-10">
                     @foreach($knowFor as $movie)
                     <div class="">
-                        <a href="{{ route('movie.show',$movie['id']) }}">
+                        <a href="{{ $movie['link'] }}">
                         <img src="{{ $movie['poster_path'] }}" alt="parasite" class="hover:opacity-75
                         transition esas-in-out duration-150">
                         </a>
                         <div class="mt-2">
-                            <a href="{{ route('movie.show',$movie['id']) }}" class="text-lg mt-2 hover:text-gray-300">{{ $movie['title'] }}</a>
+                            <a href="{{ $movie['link'] }}" class="text-lg mt-2 hover:text-gray-300">{{ $movie['title'] }}</a>
                         </div>
                     </div>
                     @endforeach

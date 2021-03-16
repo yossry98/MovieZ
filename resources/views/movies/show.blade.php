@@ -66,7 +66,7 @@
                                 <div class="modal-body px-8 py-8" @click.away="isOpen=false">
                                     <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%">
                                         <iframe class="responsive-iframe absolute top-0 left-0 w-full h-full"
-                                            src="https://youtube.com/embed/{{ $movie['videos']['results'][0]['key'] }}"
+                                            src="{{ $movie['video'] }}"
                                             style="border:0;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                     </div>
                                 </div>

@@ -29,10 +29,10 @@
                 <div class="mt-8">
                     <h4 class="font-semibold text-lg"> Featured Crew</h4>
                     <div class="flex mt-4">
-                        @foreach ($tvshow['crew'] as $crew)
+                        @foreach ($tvshow['created_by'] as $createtor)
                                 <div class="mr-8">
-                                    <div>{{ $crew['name'] }}</div>
-                                    <div class="text-sm">{{ $crew['job'] }}</div>
+                                    <div>{{ $createtor['name'] }}</div>
+                                    <div class="text-sm">Createtor</div>
                                 </div>
                         @endforeach
                     </div>
@@ -66,7 +66,7 @@
                                 <div class="modal-body px-8 py-8" @click.away="isOpen=false">
                                     <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%">
                                         <iframe class="responsive-iframe absolute top-0 left-0 w-full h-full"
-                                            src="https://youtube.com/embed/{{ $tvshow['videos']['results'][0]['key'] }}"
+                                            src="{{ $tvshow['video'] }}"
                                             style="border:0;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                     </div>
                                 </div>

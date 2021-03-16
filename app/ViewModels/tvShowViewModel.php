@@ -29,12 +29,14 @@ class tvShowViewModel extends ViewModel
                 'vote_average' => $tvshow['vote_average'] * 10 . '%',
                 'release_date' => Carbon::parse($tvshow['first_air_date'])->format('M d Y'),
                 'genres' => collect($this->tvshow['genres'])->pluck('name')->flatten()->implode(', '),
-                'crew'=> collect($this->tvshow['credits']['crew'])->take(2),
+                'created_by'=> collect($this->tvshow['created_by'])->take(2),
                 'cast'=> collect($this->tvshow['credits']['cast'])->take(5),
                 'images'=> collect($this->tvshow['images']['backdrops'])->take(9),
+                'video' => $tvshow['videos']['results']?'https://youtube.com/embed/'. $tvshow['videos']['results'][0]['key']
+                :'https://youtube.com',
             ])->only(
-                'id', 'name', 'poster_path', 'overview', 'genres', 'vote_average','release_date','crew',
-                'cast','images', 'videos'
+                'id', 'name', 'poster_path', 'overview', 'genres', 'vote_average','release_date','created_by',
+                'cast','images', 'video','videos'
             );;
 
     }

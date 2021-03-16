@@ -34,14 +34,28 @@ class ActorViewModel extends ViewModel
     }
     public function knowFor()
     {
+        
         //$cast = collect($this->credits)->get('cast');
-        return collect($this->knowFor['cast'])->where('media_type','movie')->sortByDesc('popularity')->take(5)
+        return collect($this->knowFor['cast'])->sortByDesc('popularity')->take(5)
         ->map(function($movie){
+            if(isset($movie['title']))
+                $title = $movie['title'];
+            elseif(isset($movie['name']))
+                $title = $movie['name'];
+            else 
+                $title = 'untitled';
+
+            if($movie['media_type'] === 'movie')
+                $link =route('movie.show',$movie['id']);
+            else 
+                $link = route('tvshow.show',$movie['id']);
+
             return collect($movie)->merge([
                 'poster_path' => $movie['poster_path']?'https://image.tmdb.org/t/p/w185/'.$movie['poster_path']
                 : 'https://via.placeholder/185x278',
-                'title'=> isset($movie['title'])? $movie['title']:'untitled',
-            ])->only('id','title', 'poster_path');
+                'title'=> $title,
+                'link' => $link,
+            ])->only('id', 'title', 'poster_path', 'link');
         });
     }
     public function socialLinks()
