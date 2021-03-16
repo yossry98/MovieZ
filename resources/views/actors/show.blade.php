@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="movie-info border-b border-gray-800">
+    <div class="actor-info border-b border-gray-800">
         <div class="container mx-auto px-4 py-16 flex">
             <div class="flex-none">
                 <img src="{{ $actor['profile_path'] }}" alt="{{ $actor['name'] }}" class="w-96">
@@ -70,7 +70,6 @@
                     @endif
                 </ul>
             </div>
-
             <div class="ml-24">
                 <h2 class="font-semibold text-4xl">
                     {{ $actor['name'] }}
@@ -106,6 +105,19 @@
                     @endforeach
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="actor-info border-b border-gray-800">
+        <div class="container mx-auto px-4 py-16">
+            <h4 class="text-4xl font-semibold mt-12">Know For</h4>
+            <ul class="list-disc leading-loose pl-5 mt-8">
+                @foreach ($credits as $credit)
+                <li><a href="{{ route('movie.show',$credit['id']) }}">
+                    {{ $credit['year'] }} &middot;<strong>{{ $credit['title'] }} </strong> as {{ $credit['character'] }}
+                </a></li>
+                @endforeach
+            </ul>
         </div>
     </div>
 

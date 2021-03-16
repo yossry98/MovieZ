@@ -55,15 +55,27 @@ class ActorViewModel extends ViewModel
     public function credits()
     {
         return collect($this->knowFor['cast'])->map(function($movie){
+
+            if(isset($movie['release_date']))
+                $release_date = $movie['release_date'];
+            elseif(isset($movie['first_air_date']))
+                $release_date = $movie['first_air_date'];
+            else
+                $release_date = '';
+
+            if(isset($movie['title']))
+                $title = $movie['title'];
+            elseif(isset($movie['name']))
+                $title = $movie['name'];
+            else
+                $title = 'untitled';
             return collect($movie)->merge([
-                'year' => Carbon::parse($movie['release_date']? $movie['release_date']: $movie['release_date'])->year,//uncomplete
-                'title'=> collect($movie)->where('media_type'.'movie')? $movie['title']:$movie['name'],
-                'character' =>$movie['character']?$movie['character']:'himself',
+                'year' => $release_date? Carbon::parse($release_date)->year:'futuer',
+                'title'=> $title,
+                'character' =>$movie['character']? $movie['character']:'himself',
 
             ])->only('id', 'title', 'year', 'character');
             //->only('id','title', 'poster_path');
-        })->sortByDesc('year')->take(20)
-        //
-        ->dump();
+        })->sortByDesc('year');
     }
 }
